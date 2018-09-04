@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>登录</title>
+</head>
+<body>
+<form th:action="@{/adduser}" method="get">
+
+    <input type="hidden" name="user" th:value="*{user}" />
+    <input type="text" name="vps" th:value="*{vps}" />
+    <button type="submit" style="width:190px;">登 录</button>
+
+</form>
+</body>
+</html>
