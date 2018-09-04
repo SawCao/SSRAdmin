@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 public class MainControll {
 
-    @PostMapping("/testssh")
+    @PostMapping("/adduser")
     public String testSSH(@RequestHeader String vpsName,
                           @RequestBody User user){
         VPS vps = JsonUtil.getVps(vpsName);
@@ -44,6 +44,23 @@ public class MainControll {
                 " -f \"25,465,233-266\" " +
                 " -M " + user.getMonth());
 
+    }
+
+    @GetMapping("/updatemonth")
+    public void updateMonth(@RequestHeader String username,
+                            @RequestHeader String month){
+        try {
+            String vpsName = JsonUtil.getUser(username);
+            if(vpsName == null)
+                throw new Exception("sadasd");
+            else {
+                JsonUtil.upadateUserMonth(vpsName, month);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
