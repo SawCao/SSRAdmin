@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <meta charset="UTF-8"/>
+    <title>新增用户</title>
+</head>
+
+<body>
+<div class="contentDiv">
+    <legend>
+        <strong>添加用户</strong>
+    </legend>
+
+    <form th:action="@{/user/{action}(action=${action})}" method="post" class="form-horizontal">
+
+        <!--/*@thymesVar id="user" type=""*/-->
+        <input type="hidden" name="username" th:value="${user.userName}"/>
+
+        <div class="form-group">
+            <label for="user_user" class="col-sm-2 control-label">用户名:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_user" name="name" th:value="${user.userName}"
+                       th:field="*{user.userName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_vps" class="col-sm-2 control-label">分属服务器:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_vps" name="writer" th:value="${user.vpsName}"
+                       th:field="*{user.vpsName}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="user_port" class="col-sm-2 control-label">端口:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_port" name="writer" th:value="${user.port}"
+                       th:field="*{user.port}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_transfer" class="col-sm-2 control-label">流量:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_transfer" name="writer" th:value="${user.transfer}"
+                       th:field="*{user.transfer}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_speedthread" class="col-sm-2 control-label">单用户带宽:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_speedthread" name="writer" th:value="${user.speedThread}"
+                       th:field="*{user.speedThread}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user-speedport" class="col-sm-2 control-label">端口带宽:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user-speedport" name="writer" th:value="${user.speedPort}"
+                       th:field="*{user.speedPort}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_usernum" class="col-sm-2 control-label">端口用户同时在线数:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_usernum" name="writer" th:value="${user.userNum}"
+                       th:field="*{user.userNum}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_months" class="col-sm-2 control-label">月份:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="user_months" name="writer" th:value="${user.months}"
+                       th:field="*{user.months}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
+                <input class="btn" type="button" value="返回" onclick="history.back()"/>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,20 +1,13 @@
 package com.sawcao.ssradmin.controller;
 
 
-import ch.ethz.ssh2.Connection;
-import ch.ethz.ssh2.Session;
-import ch.ethz.ssh2.StreamGobbler;
-import com.sawcao.ssradmin.constant.SSHConstant;
 import com.sawcao.ssradmin.domain.User;
 import com.sawcao.ssradmin.dto.VPS;
-import com.sawcao.ssradmin.utils.JsonUtil;
+import com.sawcao.ssradmin.service.UserService;
 import com.sawcao.ssradmin.utils.SSHUtil;
-import org.python.bouncycastle.jce.exception.ExtIOException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import javax.jws.soap.SOAPBinding;
-import java.io.*;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,14 +15,35 @@ import java.util.concurrent.ExecutionException;
  * Time: 2018/8/31
  **/
 @RestController
+@RequestMapping(value = "/users")
 public class MainControll {
 
+    @Autowired
+    UserService userService;
+
+    @GetMapping
+    public String getUserList(ModelMap map) {
+        map.addAttribute("userList", userService.findAllUser());
+        return "userList";
+    }
+
+    /**
+     * 显示创建用户表单
+     *
+     */
+    @GetMapping(value = "/adduserform")
+    public String createUserForm(ModelMap map) {
+        map.addAttribute("user", new User());
+        map.addAttribute("action", "create");
+        return "userForm";
+    }
+
     @PostMapping("/adduser")
-    public String testSSH(@RequestHeader String vpsName,
-                          @RequestBody User user){
-        VPS vps = JsonUtil.getVps(vpsName);
+    public String testSSH(@ModelAttribute User user){
+        VPS vps = userService.getVps(user.getVpsName());
         SSHUtil sshconnect = new SSHUtil(vps.getIp(),vps.getUserName(),vps.getPassword());
-        return sshconnect.execute("cd libsodium-1.0.16\ncd shadowsocksR-b\n" +
+        return sshconnect.execute("cd libsodium-1.0.16\n" +
+                "cd shadowsocksR-b\n" +
                 "python mujson_mgr.py " +
                 "-a -u " + user.getUserName() +
                 " -p " + user.getPort() +
@@ -50,14 +64,12 @@ public class MainControll {
     public void updateMonth(@RequestHeader String username,
                             @RequestHeader String month){
         try {
-            String vpsName = JsonUtil.getUser(username);
+            String vpsName = userService.getUser(username);
             if(vpsName == null)
                 throw new Exception("sadasd");
             else {
-                JsonUtil.upadateUserMonth(vpsName, month);
+                userService.upadateUserMonth(vpsName, month);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }

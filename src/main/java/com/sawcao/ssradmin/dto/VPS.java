@@ -10,6 +10,8 @@ import lombok.Data;
  **/
 @Data
 public class VPS {
+
+    private String vpsName;
     private String ip;
     private String userName;
     private String password;

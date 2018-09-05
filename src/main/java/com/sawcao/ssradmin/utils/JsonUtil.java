@@ -1,10 +1,12 @@
 package com.sawcao.ssradmin.utils;
 
+import com.sawcao.ssradmin.domain.User;
 import com.sawcao.ssradmin.dto.VPS;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.thymeleaf.templatemode.TemplateMode;
 
 import java.io.*;
 import java.util.*;
@@ -14,6 +16,11 @@ import java.util.*;
  * User: caorui
  * Time: 2018/8/31
  **/
+
+/**
+ * 数据存储格式为 [userName vpsName port month transfer speedPort speedThread userNum]
+ */
+@Deprecated
 public class JsonUtil {
 
     public static VPS getVps(String vpsName){
@@ -66,6 +73,30 @@ public class JsonUtil {
         return null;
     }
 
+    public static List<User> getAllUser() throws IOException {
+        File file=new File("D://vpsData/userData.json");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        List<User> userList = new ArrayList<>();
+        User tempUser = null;
+        String line;
+        String[] userInfo;
+        while ((line = br.readLine()) != null) {
+            userInfo = line.split(" ");
+
+            tempUser.setUserName(userInfo[0]);
+            tempUser.setVpsName(userInfo[1]);
+            tempUser.setPort(userInfo[2]);
+            tempUser.setMonth(userInfo[3]);
+            tempUser.setTransfer(userInfo[4]);
+            tempUser.setSpeedPort(userInfo[5]);
+            tempUser.setSpeedThread(userInfo[6]);
+            tempUser.setUserNum(userInfo[7]);
+            tempUser.setPassword("******");
+
+            userList.add(tempUser);
+        }
+        return userList;
+    }
     public static void addUser(String userName,String vpsName,String month,String port) throws IOException {
         File file=new File("D://vpsData/userData.json");
         BufferedWriter wr = new BufferedWriter(new FileWriter(file,true));
