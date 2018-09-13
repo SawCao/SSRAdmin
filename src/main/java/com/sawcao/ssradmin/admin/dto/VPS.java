@@ -1,4 +1,4 @@
-package com.sawcao.ssradmin.dto;
+package com.sawcao.ssradmin.admin.dto;
 
 import lombok.Data;
 

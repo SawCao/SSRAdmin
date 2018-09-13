@@ -1,6 +1,6 @@
-package com.sawcao.ssradmin.mapper;
+package com.sawcao.ssradmin.admin.mapper;
 
-import com.sawcao.ssradmin.dto.VPS;
+import com.sawcao.ssradmin.admin.dto.VPS;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

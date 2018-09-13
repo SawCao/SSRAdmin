@@ -1,12 +1,13 @@
-package com.sawcao.ssradmin.service.impl;
+package com.sawcao.ssradmin.admin.service.impl;
 
-import com.sawcao.ssradmin.domain.User;
-import com.sawcao.ssradmin.dto.VPS;
-import com.sawcao.ssradmin.mapper.UserMapper;
-import com.sawcao.ssradmin.mapper.VpsMapper;
-import com.sawcao.ssradmin.service.UserService;
-import com.sawcao.ssradmin.utils.JsonUtil;
+import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.VPS;
+import com.sawcao.ssradmin.admin.mapper.UserMapper;
+import com.sawcao.ssradmin.admin.mapper.VpsMapper;
+import com.sawcao.ssradmin.admin.service.UserService;
+import com.sawcao.ssradmin.admin.utils.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * User: caorui
  * Time: 2018/9/5
  **/
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -38,8 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(String userName, String vpsName, String month, String port) {
-        User user = new User(userName, vpsName, month, port);
+    public void addUser(User user) {
         userMapper.addUser(user);
     }
 
@@ -51,5 +52,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAllUser() {
         return userMapper.findAllUser();
+    }
+
+    @Override
+    public User findMonthsByCondition(String willFindByCondition){
+        return userMapper.findByCondition("months",willFindByCondition);
     }
 }

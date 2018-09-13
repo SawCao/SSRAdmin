@@ -1,7 +1,7 @@
-package com.sawcao.ssradmin.service;
+package com.sawcao.ssradmin.admin.service;
 
-import com.sawcao.ssradmin.domain.User;
-import com.sawcao.ssradmin.dto.VPS;
+import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.VPS;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.util.List;
  * User: caorui
  * Time: 2018/9/5
  **/
-@Service
+
 public interface UserService {
 
     /**
@@ -41,7 +41,7 @@ public interface UserService {
      * @param [userName, vpsName, month, port]
      * @return void
      */
-    void addUser(String userName,String vpsName,String month,String port);
+    void addUser(User user);
 
     /**
      * @author caorui
@@ -56,4 +56,11 @@ public interface UserService {
      * @return java.util.List<com.sawcao.ssradmin.domain.User>
      */
     List<User> findAllUser();
+
+    /**
+     * @author caorui
+     * @param [willFindByCondition]
+     * @return com.sawcao.ssradmin.admin.domain.User
+     */
+    User findMonthsByCondition(String willFindByCondition);
 }

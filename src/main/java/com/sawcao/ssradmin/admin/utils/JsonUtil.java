@@ -1,12 +1,10 @@
-package com.sawcao.ssradmin.utils;
+package com.sawcao.ssradmin.admin.utils;
 
-import com.sawcao.ssradmin.domain.User;
-import com.sawcao.ssradmin.dto.VPS;
+import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.VPS;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.thymeleaf.templatemode.TemplateMode;
 
 import java.io.*;
 import java.util.*;
@@ -86,7 +84,7 @@ public class JsonUtil {
             tempUser.setUserName(userInfo[0]);
             tempUser.setVpsName(userInfo[1]);
             tempUser.setPort(userInfo[2]);
-            tempUser.setMonth(userInfo[3]);
+            tempUser.setMonths(userInfo[3]);
             tempUser.setTransfer(userInfo[4]);
             tempUser.setSpeedPort(userInfo[5]);
             tempUser.setSpeedThread(userInfo[6]);

@@ -1,4 +1,4 @@
-package com.sawcao.ssradmin.config;
+package com.sawcao.ssradmin.admin.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;

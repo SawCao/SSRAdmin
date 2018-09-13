@@ -1,4 +1,4 @@
-package com.sawcao.ssradmin.utils;
+package com.sawcao.ssradmin.admin.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

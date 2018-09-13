@@ -1,4 +1,4 @@
-package com.sawcao.ssradmin.utils;
+package com.sawcao.ssradmin.admin.utils;
 
 /**
  * Created by IntelliJ IDEA.

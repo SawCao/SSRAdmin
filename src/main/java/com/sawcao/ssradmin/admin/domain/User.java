@@ -1,6 +1,5 @@
-package com.sawcao.ssradmin.domain;
+package com.sawcao.ssradmin.admin.domain;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -38,4 +37,5 @@ public class User implements Serializable {
         this.dtrans = "0";
         this.utrans = "0";
     }
+    public User(){}
 }
