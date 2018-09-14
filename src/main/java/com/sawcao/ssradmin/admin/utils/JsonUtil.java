@@ -1,6 +1,6 @@
 package com.sawcao.ssradmin.admin.utils;
 
-import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.User;
 import com.sawcao.ssradmin.admin.dto.VPS;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONException;

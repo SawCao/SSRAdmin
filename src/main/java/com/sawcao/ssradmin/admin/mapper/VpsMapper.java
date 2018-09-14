@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 
 /**
  * Created by IntelliJ IDEA.
@@ -13,9 +15,12 @@ import org.apache.ibatis.annotations.Select;
  **/
 @Mapper
 public interface VpsMapper {
+    @Select("SELECT * FROM vps")
+    List<VPS> findAllVps();
+
+    @Insert("INSERT INTO vps (vpsService,vpsName,ip,userName,password) VALUES (#{vpsService},#{vpsName},#{ip},#{userName},#{password})")
+    void addVps(VPS vps);
+
     @Select("SELECT * FROM vps WHERE vpsName = #{vpsName}")
     VPS findVps(String vpsName);
-
-    @Insert("INSERT INTO vps (vpsName,ip,userName,password) VALUES (#{vpsName},#{ip},#{userName},#{password})")
-    void addVps(String vpsName, String ip, String userName, String password);
 }

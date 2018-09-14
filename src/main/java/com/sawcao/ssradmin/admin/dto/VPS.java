@@ -10,7 +10,9 @@ import lombok.Data;
  **/
 @Data
 public class VPS {
+    private static final long serialVersionUID = 1L;
 
+    private String vpsService;
     private String vpsName;
     private String ip;
     private String userName;

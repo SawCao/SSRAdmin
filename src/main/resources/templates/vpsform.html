@@ -63,58 +63,38 @@
             <form action="#" method="post" id="commentForm" class="ajax_form">
                 <div class="form-inner">
                     <div class="field_select">
-                        <label for="username" class="label_title">用户名:</label>
-                        <input type="text" name="subject" id="username" value=""  class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.userName}"
-                               th:field="*{user.userName}">
+                        <label for="username" class="label_title">服务商:</label>
+                        <input type="text" name="subject" id="username" value=""  class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${vps.vpsService}"
+                               th:field="*{vps.vpsService}">
                     </div>
                     <div class="field_text">
-                        <label for="vpsname" class="label_title">服务器:</label>
-                        <input type="text" name="subject" id="vpsname" value=""  class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.vpsName}"
-                               th:field="*{user.vpsName}">
+                        <label for="vpsname" class="label_title">服务器名称:</label>
+                        <input type="text" name="subject" id="vpsname" value=""  class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${vps.vpsName}"
+                               th:field="*{vps.vpsName}">
                     </div>
                     <div class="clear"></div>
                     <div class="field_text">
-                        <label for="port" class="label_title">端口:</label>
-                        <input type="text" name="subject" id="port" value="" placeholder="从5000开始" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.port}"
-                               th:field="*{user.port}">
+                        <label for="port" class="label_title">ip:</label>
+                        <input type="text" name="subject" id="port" value="" placeholder="从5000开始" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${vps.ip}"
+                               th:field="*{vps.ip}">
                     </div>
                     <div class="clear"></div>
                     <div class="field_text">
-                        <label for="transfer" class="label_title">月流量:</label>
-                        <input type="text" name="subject" id="transfer" value="" placeholder="40" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.transfer}"
-                               th:field="*{user.transfer}">
+                        <label for="transfer" class="label_title">用户名:</label>
+                        <input type="text" name="subject" id="transfer" value="" placeholder="40" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${vps.userName}"
+                               th:field="*{vps.userName}">
                     </div>
                     <div class="clear"></div>
                     <div class="field_text">
-                        <label for="user_speedthread" class="label_title">线程带宽:</label>
-                        <input type="text" name="subject" id="user_speedthread" value="" placeholder="1500" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.speedThread}"
-                               th:field="*{user.speedThread}">
+                        <label for="user_speedthread" class="label_title">密码:</label>
+                        <input type="text" name="subject" id="user_speedthread" value="" placeholder="1500" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${vps.password}"
+                               th:field="*{vps.password}">
                     </div>
                     <div class="clear"></div>
-                    <div class="field_text">
-                        <label for="user-speedpor" class="label_title">端口带宽:</label>
-                        <input type="text" name="subject" id="user-speedpor" value="" placeholder="1500" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.speedPort}"
-                               th:field="*{user.speedPort}">
-                    </div>
-                    <div class="clear"></div>
-                    <div class="field_text">
-                        <label for="user_usernum" class="label_title">用户数:</label>
-                        <input type="text" name="subject" id="user_usernum" value="" placeholder="3" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.userNum}"
-                               th:field="*{user.userNum}">
-                    </div>
-                    <div class="clear"></div>
-                    <div class="field_text">
-                        <label for="user_months" class="label_title">剩余时间:</label>
-                        <input type="text" name="subject" id="user_months" value="" placeholder="12" class="inputtext input_middle required gradient" hidefocus="true" style="outline: none;" th:value="${user.months}"
-                               th:field="*{user.months}">
-                    </div>
-
-                    <div class="clear"></div>
-
                 </div>
 
                 <div class="rowSubmit">
-                    <a onclick="document.getElementById('commentForm').reset();return false" href="/user/userlist" class="link-reset btn btn-white" hidefocus="true" style="outline: none;"><span>返回</span></a>
+                    <a onclick="document.getElementById('commentForm').reset();return false" href="/vps/vpslist" class="link-reset btn btn-white" hidefocus="true" style="outline: none;"><span>返回</span></a>
                     <span class="btn" style="opacity: 1;"><input type="submit" id="send" value="提交" hidefocus="true" style="outline: none;" class="gradient"></span>
                 </div>
             </form>

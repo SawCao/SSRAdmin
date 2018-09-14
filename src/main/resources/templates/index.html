@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>用户列表</title>
+    <meta charset="UTF-8">
+    <title>红杏SSR 控制后台</title>
 
     <!-- main JS libs -->
     <script src="../static/vanilla-cream-css/js/libs/modernizr.min.js" th:src="@{/vanilla-cream-css/js/libs/modernizr.min.js}"></script>
@@ -25,38 +25,19 @@
     </style>
     <![endif]-->
 </head>
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
 <body>
-<div class="content" role="main">
-    <div class="container">
-    <table class="table table-striped table-bordered">
-        <tr>
-            <th>用户名</th>
-            <th>服务器名</th>
-            <th>端口</th>
-            <th>流量</th>
-            <th>月份</th>
-            <th>操作</th>
-        </tr>
-        <tbody>
-        <tr th:each="user : ${userList}" class="text-info">
-            <th scope="row" th:text="${user.userName}"></th>
-            <td th:text="${user.vpsName}"></td>
-            <td th:text="${user.port}"></td>
-            <td th:text="${user.transfer}"></td>
-            <td th:text="${user.months}"></td>
-            <td><a class="btn btn-green" th:href="@{/user/delete/{userId}(userId=${user.userName})}"><span>删除</span></a>
-            <a class="btn btn-green" th:href="@{/user/update/{userId}(userId=${user.userName})}"><span>修改</span></a>
-            <a class="btn btn-green" th:href="@{/user/details/{vpsname}(vpsname=${user.vpsName})}"><span>详情</span></a></td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div><a class="btn btn-primary" href="/user/create" role="button"><span>新增用户</span></a></div>
+<div class="col-sm-4 col-sm-offset-4">
+    <div class="dropdownMenu style2 gradient">
+        <a id="drop1" href="#" role="button" class="dropdown-toggle gradient" data-toggle="dropdown" hidefocus="true" style="outline: none;"><i class="ico-cat ico-cat1 gradient"></i>页面</a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+            <li role="presentation" class="first"><a role="menuitem" tabindex="-1" href="/user/userlist" hidefocus="true" style="outline: none;" class="gradient"><i class="ico-cat ico-cat2 gradient"></i>用户列表</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" hidefocus="/vps/vpslist" style="outline: none;" class="gradient"><i class="ico-cat ico-cat3 gradient"></i>服务器列表</a></li>
+            <li role="presentation"><a role="menuitem" tabindex="-1" href="#" hidefocus="/pakeage/pakeagelist" style="outline: none;" class="gradient"><i class="ico-cat ico-cat4 gradient"></i>套餐列表</a></li>
+            <li role="presentation" class="last"><a role="menuitem" tabindex="-1" href="#" hidefocus="true" style="outline: none;" class="gradient"><i class="ico-cat ico-cat6 gradient"></i>暂定</a></li>
+        </ul>
     </div>
+    <H2>红杏SSR</H2>
 </div>
+
 </body>
 </html>

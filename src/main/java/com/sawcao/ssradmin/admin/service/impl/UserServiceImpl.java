@@ -1,6 +1,6 @@
 package com.sawcao.ssradmin.admin.service.impl;
 
-import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.User;
 import com.sawcao.ssradmin.admin.dto.VPS;
 import com.sawcao.ssradmin.admin.mapper.UserMapper;
 import com.sawcao.ssradmin.admin.mapper.VpsMapper;
@@ -24,15 +24,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private VpsMapper vpsMapper;
 
-    @Override
-    public VPS getVps(String vpsName) {
-        return vpsMapper.findVps(vpsName);
-    }
-
-    @Override
-    public void setVps(String vpsName, String ip, String username, String password) {
-        vpsMapper.addVps(vpsName, ip, username, password);
-    }
 
     @Override
     public String getUser(String userName) throws IOException {
@@ -55,7 +46,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findMonthsByCondition(String willFindByCondition){
-        return userMapper.findByCondition("months",willFindByCondition);
+    public User getUserByCondition(String conditionName, String condition) {
+        return userMapper.findByCondition(conditionName, condition);
     }
 }

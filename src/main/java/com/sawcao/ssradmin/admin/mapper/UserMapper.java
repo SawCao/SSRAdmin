@@ -1,6 +1,6 @@
 package com.sawcao.ssradmin.admin.mapper;
 
-import com.sawcao.ssradmin.admin.domain.User;
+import com.sawcao.ssradmin.admin.dto.User;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -26,6 +26,6 @@ public interface UserMapper {
     Integer updateUser(String willUpdate, String userName, String updateContent);
 
     @Select("SELECT * FROM users WHERE #{willCondition} = #{condition}")
-    User findByCondition(String willCondition, String condition);
+    User findByCondition(@Param("willCondition") String willCondition, @Param("condition") String condition);
 
 }
