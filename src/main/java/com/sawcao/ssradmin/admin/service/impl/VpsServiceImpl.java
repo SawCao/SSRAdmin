@@ -3,6 +3,7 @@ package com.sawcao.ssradmin.admin.service.impl;
 import com.sawcao.ssradmin.admin.dto.VPS;
 import com.sawcao.ssradmin.admin.mapper.VpsMapper;
 import com.sawcao.ssradmin.admin.service.VpsService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,4 +31,7 @@ public class VpsServiceImpl implements VpsService {
 
     @Override
     public VPS getVps(String userName){return vpsMapper.findVps(userName);}
+
+    @Override
+    public void deleteVps(String vpsName){vpsMapper.deleteVps(vpsName);}
 }

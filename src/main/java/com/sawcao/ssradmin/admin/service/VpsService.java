@@ -15,4 +15,6 @@ public interface VpsService {
     void setVps(VPS vps);
 
     VPS getVps(String userName);
+
+    void deleteVps(String vpsName);
 }

@@ -1,6 +1,7 @@
 package com.sawcao.ssradmin.admin.controller;
 
 
+import com.sawcao.ssradmin.admin.constant.SSHConstant;
 import com.sawcao.ssradmin.admin.dto.User;
 import com.sawcao.ssradmin.admin.dto.VPS;
 import com.sawcao.ssradmin.admin.service.UserService;
@@ -12,6 +13,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,7 +24,7 @@ import java.io.IOException;
 @RequestMapping("/user")
 public class UserControll {
 
-    private static String CMDString = "cd libsodium-1.0.16\n" + "cd shadowsocksR-b\n" + "python mujson_mgr.py ";
+    private static String CMDString = "python mujson_mgr.py ";
 
     @Autowired
     public UserService userService;
@@ -30,19 +32,21 @@ public class UserControll {
     @Autowired
     private VpsService vpsService;
 
+    @Autowired
+    private SSHConstant sshConstant;
+
+    //用户列表
     @GetMapping("/userlist")
     public String getUserList(ModelMap map) {
         map.addAttribute("userList", userService.findAllUser());
         return "UserList";
     }
 
-
     /**
      * 显示用户信息表单，可修改及新增
      */
     @GetMapping(value = "/create")
     public String createUserForm(ModelMap map) {
-        //map.addAttribute("user", new User());
         map.addAttribute("user",new User());
         map.addAttribute("action", "create");
         return "userForm";
@@ -51,73 +55,79 @@ public class UserControll {
     @PostMapping(value = "/create")
     public String createUser(@ModelAttribute User user) {
         userService.addUser(user);
+        sshConstant.getSshUtils().forEach(e->{
+            if(e.getVpsName().equals(user.getVpsName())){
+                e.execute(SSHConstant.CMDString + CMDString + "-a -u " + user.getUserName() +
+                        " -p " + user.getPort() +
+                        " -k " + user.getPassword() +
+                        " -m chacha20 " +
+                        " -O auth_aes128_md5 " +
+                        " -G " + user.getUserNum() +
+                        " -o tls1.2_ticket_auth_compatible " +
+                        " -s " + user.getSpeedThread() +
+                        " -S " + user.getSpeedPort() +
+                        " -t " + user.getTransfer() +
+                        " -f \"25,465,233-266\" " +
+                        " -M " + user.getMonths());
+            }
+        });
         return "redirect:/user/userlist";
     }
 
+    //跳转用户更新页面
     @GetMapping(value = "/update/{id}")
     public String addUserForm(@PathVariable String id, ModelMap map) {
-        //map.addAttribute("user", new User());
         map.addAttribute("user",userService.getUserByCondition("username",id));
         map.addAttribute("action", "update");
         return "userForm";
     }
 
+    //用户更新接口
     @PostMapping(value = "/update")
     public String addUser(@ModelAttribute User user) {
         //map.addAttribute("user", new User());
         userService.upadateUserMonth(user.getUserName(),user.getMonths());
-        /*VPS vps = userService.getVps(user.getVpsName());
-        SSHUtil sshconnect = new SSHUtil(vps.getIp(),vps.getUserName(),vps.getPassword());
-        sshconnect.execute("cd libsodium-1.0.16\n" +
-                "cd shadowsocksR-b\n" +
-                "python mujson_mgr.py " +
-                "-e -u" + user.getUserName() +
-                " -M" + user.getMonths());*/
+        sshConstant.getSshUtils().forEach(e->{
+            if(e.getVpsName().equals(user.getVpsName())){
+                e.execute(SSHConstant.CMDString +
+                        "python mujson_mgr.py " +
+                        "-e -u" + user.getUserName() +
+                        " -M" + user.getMonths());
+            }
+        });
         return "UserList";
     }
 
-    @GetMapping(value = "/details/{vpsname}")
-    public String getUserDetail(@PathVariable("vpsname") String vpsName){
-        VPS vps = vpsService.getVps(vpsName);
-        SSHUtil sshconnect = new SSHUtil(vps.getIp(),vps.getUserName(),vps.getPassword());
-        return sshconnect.execute(CMDString + "cat mudb.json");
-    }
-
-
-    @PostMapping("/adduser")
-    public String testSSH(@ModelAttribute User user){
-
-        VPS vps = vpsService.getVps(user.getVpsName());
-        SSHUtil sshconnect = new SSHUtil(vps.getIp(),vps.getUserName(),vps.getPassword());
-        return sshconnect.execute(CMDString +
-                "-a -u " + user.getUserName() +
-                " -p " + user.getPort() +
-                " -k " + user.getPassword() +
-                " -m chacha20 " +
-                " -O auth_aes128_md5 " +
-                " -G " + user.getUserNum() +
-                " -o tls1.2_ticket_auth_compatible " +
-                " -s " + user.getSpeedThread() +
-                " -S " + user.getSpeedPort() +
-                " -t " + user.getTransfer() +
-                " -f \"25,465,233-266\" " +
-                " -M " + user.getMonths());
-
-    }
-
-    @GetMapping("/updatemonth")
-    public void updateMonth(@RequestHeader String username,
-                            @RequestHeader String month){
+    //删除用户
+    @GetMapping(value = "/delete/{userId}")
+    public String deleteUser(@PathVariable String userId) {
+        User user = null;
+        userService.deleteUser(userId);
         try {
-            String vpsName = userService.getUser(username);
-            if(vpsName == null)
-                throw new Exception("sadasd");
-            else {
-                userService.upadateUserMonth(vpsName, month);
-            }
-        } catch (Exception e) {
+            user = userService.getUser(userId);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+        User finalUser = user;
+        sshConstant.getSshUtils().forEach(e->{
+            if(e.getVpsName().equals(finalUser.getVpsName())){
+                e.execute(SSHConstant.CMDString +
+                        "python mujson_mgr.py " +
+                        "-d -u" + finalUser.getUserName());
+            }
+        });
+        return "redirect:/user/userlist";
+    }
+
+    //与各个服务器同步用户信息
+    @GetMapping(value = "/refresh")
+    public String refreshUser(){
+        List<VPS> vpsList = vpsService.getAllVps();
+        userService.deleteAllUser();
+        vpsList.stream().forEach(e -> {
+            userService.refreshUser(e.getVpsName());
+        });
+        return "redirect:/user/userlist";
     }
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Time: 2018/9/13
  **/
 @Controller
-@RequestMapping("/index")
+@RequestMapping
 public class MainControll {
     @GetMapping
     public String Index(ModelMap map){

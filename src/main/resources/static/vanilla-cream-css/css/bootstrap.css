@@ -1451,7 +1451,7 @@ th {
 }
 
 .table-bordered {
-  border: 1px solid #dddddd;
+  border: 2px solid #dddddd;
 }
 
 .table-bordered > thead > tr > th,

@@ -1,18 +1,21 @@
 package com.sawcao.ssradmin.admin.constant;
 
 import com.sawcao.ssradmin.admin.dto.VPS;
+import com.sawcao.ssradmin.admin.utils.SSHUtil;
+import lombok.Data;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
  * User: caorui
  * Time: 2018/8/31
  **/
-@Deprecated
+@Data
+@Component
 public class SSHConstant {
-    public static final String JAPAN_VULTR_FIRST_IP = "107.191.61.174";
-    public static final String JAPAN_VULTR_FIRST_USERNAME = "root";
-    public static final String JAPAN_VULTR_FIRST_PASSWORD = "Z)4wYz.fR}]PKMw=";
-
-    public static final VPS JAPAN_VULTR_FIRST = new VPS();
-
+    public static String CMDString = "cd libsodium-1.0.16\n" + "cd shadowsocksR-b\n";
+    public List<SSHUtil> sshUtils;
 }

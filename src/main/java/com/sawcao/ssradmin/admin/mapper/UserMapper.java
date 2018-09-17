@@ -28,4 +28,6 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE #{willCondition} = #{condition}")
     User findByCondition(@Param("willCondition") String willCondition, @Param("condition") String condition);
 
+    @Delete("DELETE FROM users")
+    void deleteAll();
 }

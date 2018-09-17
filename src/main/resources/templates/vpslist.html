@@ -39,6 +39,7 @@
             <th>IP</th>
             <th>用户名</th>
             <th>密码</th>
+            <th>操作</th>
         </tr>
         <tbody>
         <tr th:each="vps : ${vpsList}" class="text-info">
@@ -47,6 +48,9 @@
             <td th:text="${vps.ip}"></td>
             <td th:text="${vps.userName}"></td>
             <td th:text="${vps.password}"></td>
+            <td><a class="btn btn-green" th:href="@{/vps/delete/{vpsName}(vpsName=${vps.vpsName})}"><span>删除</span></a>
+                <a class="btn btn-green" th:href="@{/vps/update/{vpsName}(vpsName=${vps.vpsName})}"><span>修改</span></a>
+                <a class="btn btn-green" th:href="@{/vps/details/{vpsname}(vpsname=${vps.vpsName})}"><span>详情</span></a></td>
         </tr>
         </tbody>
     </table>

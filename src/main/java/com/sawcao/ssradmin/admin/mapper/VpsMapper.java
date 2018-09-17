@@ -1,6 +1,7 @@
 package com.sawcao.ssradmin.admin.mapper;
 
 import com.sawcao.ssradmin.admin.dto.VPS;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,4 +24,7 @@ public interface VpsMapper {
 
     @Select("SELECT * FROM vps WHERE vpsName = #{vpsName}")
     VPS findVps(String vpsName);
+
+    @Delete("DELETE FROM vps WHERE vpsName = #{vpsName}")
+    void deleteVps(String vpsName);
 }

@@ -38,6 +38,10 @@
             <th>服务器名</th>
             <th>端口</th>
             <th>流量</th>
+            <th>线程限速</th>
+            <th>端口限速</th>
+            <th>上传使用(单位：KB)</th>
+            <th>下载使用(单位：MB)</th>
             <th>月份</th>
             <th>操作</th>
         </tr>
@@ -47,6 +51,10 @@
             <td th:text="${user.vpsName}"></td>
             <td th:text="${user.port}"></td>
             <td th:text="${user.transfer}"></td>
+            <td th:text="${user.speedThread}"></td>
+            <td th:text="${user.speedPort}"></td>
+            <td th:text="${user.utrans}"></td>
+            <td th:text="${user.dtrans}"></td>
             <td th:text="${user.months}"></td>
             <td><a class="btn btn-green" th:href="@{/user/delete/{userId}(userId=${user.userName})}"><span>删除</span></a>
             <a class="btn btn-green" th:href="@{/user/update/{userId}(userId=${user.userName})}"><span>修改</span></a>
@@ -55,8 +63,9 @@
         </tbody>
     </table>
 
-    <div><a class="btn btn-primary" href="/user/create" role="button"><span>新增用户</span></a></div>
+    <div>
+        <a class="btn btn-primary" href="/user/create" role="button"><span>新增用户</span></a></div>
+        <a class="btn btn-green" href="/user/refresh" role="button"><span>同步用户</span></a></div>
     </div>
-</div>
 </body>
 </html>

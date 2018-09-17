@@ -1,6 +1,5 @@
-drop table vps;
 
-create table if not exists users (username varchar(32) primary key not null,
+create table if not exists users (username varchar(32),
                                     vpsname varchar(32),
                                     password varchar(32),
                                     port varchar(32),
@@ -8,7 +7,8 @@ create table if not exists users (username varchar(32) primary key not null,
                                     speedthread varchar(32),
                                     speedport varchar(32),
                                     usernum varchar(10),
-                                    months varchar(10));
+                                    months varchar(10),
+                                    primary key(username,vpsname));
 create table if not exists vps (vpsname varchar (32) primary key not null,
                                   vpsService varchar (32),
                                   ip varchar (32),

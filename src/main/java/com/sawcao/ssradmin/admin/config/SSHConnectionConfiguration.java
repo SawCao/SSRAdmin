@@ -10,5 +10,6 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 @MapperScan("com.sawcao.ssradmin.mapper")
-public class MybatisScanConfiguration {
+public class SSHConnectionConfiguration {
+
 }

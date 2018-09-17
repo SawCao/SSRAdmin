@@ -20,7 +20,7 @@ public interface UserService {
      * @return java.lang.String
      * @author caorui
      */
-    String getUser(String userName) throws IOException;
+    User getUser(String userName) throws IOException;
 
     /**
      * @param [userName, vpsName, month, port]
@@ -49,4 +49,16 @@ public interface UserService {
      * @author caorui
      */
     User getUserByCondition(String conditionName, String willFindByCondition);
+
+    /**
+     * @author caorui
+     * @param [userName]
+     * @return void
+     */
+    void deleteUser(String userName);
+
+    void deleteAllUser();
+
+    void refreshUser(String vpsName);
+
 }

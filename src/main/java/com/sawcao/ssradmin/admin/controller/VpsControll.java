@@ -1,5 +1,9 @@
 package com.sawcao.ssradmin.admin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
+import com.sawcao.ssradmin.admin.constant.SSHConstant;
 import com.sawcao.ssradmin.admin.dto.User;
 import com.sawcao.ssradmin.admin.dto.VPS;
 import com.sawcao.ssradmin.admin.service.UserService;
@@ -10,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 /**
  * Created by IntelliJ IDEA.
  * User: caorui
@@ -18,9 +24,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/vps")
 public class VpsControll {
-    @Autowired
-    public VpsService vpsService;
 
+    @Autowired
+    private VpsService vpsService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private SSHConstant sshConstant;
+
+    //列表
     @GetMapping("/vpslist")
     public String getUserList(ModelMap map) {
         map.addAttribute("vpsList", vpsService.getAllVps());
@@ -37,6 +51,13 @@ public class VpsControll {
         map.addAttribute("action", "create");
         return "vpsform";
     }
+
+    @GetMapping(value = "/delete/{vpsName}")
+    public String deleteVps(@PathVariable String vpsName){
+        vpsService.deleteVps(vpsName);
+        return "redirect:/vps/vpslist";
+    }
+
 
     @PostMapping(value = "/create")
     public String createUser(@ModelAttribute VPS vps) {
