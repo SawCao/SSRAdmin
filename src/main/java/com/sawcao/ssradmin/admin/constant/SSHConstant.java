@@ -1,9 +1,7 @@
 package com.sawcao.ssradmin.admin.constant;
 
-import com.sawcao.ssradmin.admin.dto.VPS;
 import com.sawcao.ssradmin.admin.utils.SSHUtil;
 import lombok.Data;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

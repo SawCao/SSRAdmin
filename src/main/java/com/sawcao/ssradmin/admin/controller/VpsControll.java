@@ -52,16 +52,17 @@ public class VpsControll {
         return "vpsform";
     }
 
-    @GetMapping(value = "/delete/{vpsName}")
-    public String deleteVps(@PathVariable String vpsName){
-        vpsService.deleteVps(vpsName);
-        return "redirect:/vps/vpslist";
-    }
-
-
+    //创建新VPS
     @PostMapping(value = "/create")
     public String createUser(@ModelAttribute VPS vps) {
         vpsService.setVps(vps);
+        return "redirect:/vps/vpslist";
+    }
+
+    //删除VPS
+    @GetMapping(value = "/delete/{vpsName}")
+    public String deleteVps(@PathVariable String vpsName){
+        vpsService.deleteVps(vpsName);
         return "redirect:/vps/vpslist";
     }
 

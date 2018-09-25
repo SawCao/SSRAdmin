@@ -48,7 +48,7 @@ public interface UserService {
      * @return com.sawcao.ssradmin.admin.domain.User
      * @author caorui
      */
-    User getUserByCondition(String conditionName, String willFindByCondition);
+    User getUserByCondition(String willFindByCondition);
 
     /**
      * @author caorui

@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String userName){
-        return userMapper.findByCondition("userName",userName);
+        return userMapper.findByUserName(userName);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByCondition(String conditionName, String condition) {
-        return userMapper.findByCondition(conditionName, condition);
+    public User getUserByCondition(String condition) {
+        return userMapper.findByUserName(condition);
     }
 
     @Override
@@ -74,8 +74,8 @@ public class UserServiceImpl implements UserService {
     public void refreshUser(String vpsName){
         sshConstant.getSshUtils().forEach(e->{
             if(e.getVpsName().equals(vpsName)){
+                String s = e.execute(SSHConstant.CMDString + "cat mudb.json");
                 e.execute("pwd");
-                String s = e.execute("cat mudb.json");
                 ArrayList<JSONObject> jsonObjects = JSON.parseObject(s, new TypeReference<ArrayList<JSONObject>>(){});
                 jsonObjects.forEach(ee -> addUser(new User(ee.getString("user"),
                         vpsName,

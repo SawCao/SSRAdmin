@@ -39,5 +39,28 @@
     <H2>红杏SSR</H2>
 </div>
 
+<!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+<div class="col-sm-2 col-sm-offset-4">
+    <div class="card card-container">
+        <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" method="POST">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input   id="inputEmail" class="form-control" th:value="*{adminUser.adminName}" th:field="*{adminUser.adminName}" required autofocus>
+            <input  type="password" id="inputPassword" class="form-control" placeholder="Password" th:value="*{adminUser.password}" th:field="*{adminUser.password}" required>
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"><span>登录</span></button>
+        </form><!-- /form -->
+    </div><!-- /card-container -->
+</div><!-- /container -->
+
 </body>
 </html>

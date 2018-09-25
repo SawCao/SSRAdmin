@@ -25,8 +25,8 @@ public interface UserMapper {
     @Update("UPDATE users SET #{willUpdate} = #{updateContent} WHERE username = #{userName}")
     Integer updateUser(String willUpdate, String userName, String updateContent);
 
-    @Select("SELECT * FROM users WHERE #{willCondition} = #{condition}")
-    User findByCondition(@Param("willCondition") String willCondition, @Param("condition") String condition);
+    @Select("SELECT * FROM users WHERE username = #{username}")
+    User findByUserName(@Param("username") String condition);
 
     @Delete("DELETE FROM users")
     void deleteAll();

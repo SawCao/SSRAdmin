@@ -30,6 +30,9 @@
     <title>Title</title>
 </head>
 <body>
+<div id="sending" style="filter:alpha(opacity=80); position:absolute; top:310px; left:135px; z-index:10; visibility:hidden; width: 617px; height: 81px;">
+    <TABLE WIDTH=80% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><td width=30%></td><TD bgcolor=#104A7B><TABLE WIDTH=100% height=80 BORDER=0 CELLSPACING=2 CELLPADDING=0><TR><td bgcolor=#eeeeee align=center>正在处理数据, 请稍候...</td></tr></table></td><td width=30%></td></tr></table>
+</div>
 <div class="content" role="main">
     <div class="container">
     <table class="table table-striped table-bordered">
@@ -65,7 +68,7 @@
 
     <div>
         <a class="btn btn-primary" href="/user/create" role="button"><span>新增用户</span></a></div>
-        <a class="btn btn-green" href="/user/refresh" role="button"><span>同步用户</span></a></div>
+        <a class="btn btn-green" href="/user/refresh" role="button" sending.style.visibility="visible"><span>同步用户</span></a></div>
     </div>
 </body>
 </html>

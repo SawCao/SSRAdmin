@@ -77,7 +77,7 @@ public class UserControll {
     //跳转用户更新页面
     @GetMapping(value = "/update/{id}")
     public String addUserForm(@PathVariable String id, ModelMap map) {
-        map.addAttribute("user",userService.getUserByCondition("username",id));
+        map.addAttribute("user",userService.getUserByCondition(id));
         map.addAttribute("action", "update");
         return "userForm";
     }
@@ -86,7 +86,6 @@ public class UserControll {
     @PostMapping(value = "/update")
     public String addUser(@ModelAttribute User user) {
         //map.addAttribute("user", new User());
-        userService.upadateUserMonth(user.getUserName(),user.getMonths());
         sshConstant.getSshUtils().forEach(e->{
             if(e.getVpsName().equals(user.getVpsName())){
                 e.execute(SSHConstant.CMDString +
@@ -95,6 +94,7 @@ public class UserControll {
                         " -M" + user.getMonths());
             }
         });
+        userService.upadateUserMonth(user.getUserName(),user.getMonths());
         return "UserList";
     }
 
@@ -102,7 +102,6 @@ public class UserControll {
     @GetMapping(value = "/delete/{userId}")
     public String deleteUser(@PathVariable String userId) {
         User user = null;
-        userService.deleteUser(userId);
         try {
             user = userService.getUser(userId);
         } catch (IOException e) {
@@ -116,6 +115,7 @@ public class UserControll {
                         "-d -u" + finalUser.getUserName());
             }
         });
+        userService.deleteUser(userId);
         return "redirect:/user/userlist";
     }
 
